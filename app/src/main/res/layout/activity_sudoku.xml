@@ -3,24 +3,42 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
+    android:background="#F5F7FA"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Header -->
     <TextView
         android:id="@+id/txtLevel"
-        android:text="Level"
-        android:textSize="22sp"
+        android:text="Sudoku - Easy"
+        android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="#222"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Mistakes -->
+    <TextView
+        android:id="@+id/txtMistake"
+        android:text="Mistakes: 0/10"
+        android:textSize="18sp"
+        android:textColor="#E53935"
         android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <GridLayout
-        android:id="@+id/gridSudoku"
-        android:columnCount="9"
-        android:rowCount="9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+
+        <GridLayout
+            android:id="@+id/gridSudoku"
+            android:columnCount="9"
+            android:rowCount="9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
