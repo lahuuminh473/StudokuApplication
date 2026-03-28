@@ -1,100 +1,151 @@
 package com.example.studokuapplication;
 
+import java.util.*;
+
 public class SudokuData {
 
+    static Random rand = new Random();
 
-        public static int[][][] easy = {
+    // ===== PUBLIC METHOD =====
+    public static int[][] generate(String level){
 
-                {
-                        {5,3,0,0,7,0,0,0,0},
-                        {6,0,0,1,9,5,0,0,0},
-                        {0,9,8,0,0,0,0,6,0},
+        int[][] board = new int[9][9];
 
-                        {8,0,0,0,6,0,0,0,3},
-                        {4,0,0,8,0,3,0,0,1},
-                        {7,0,0,0,2,0,0,0,6},
+        fillBoard(board);
 
-                        {0,6,0,0,0,0,2,8,0},
-                        {0,0,0,4,1,9,0,0,5},
-                        {0,0,0,0,8,0,0,7,9}
-                },
+        int clues;
+        if(level.equals("dễ")) clues = 40;
+        else if(level.equals("trung bình")) clues = 32;
+        else clues = 25;
 
-                {
-                        {0,0,0,2,6,0,7,0,1},
-                        {6,8,0,0,7,0,0,9,0},
-                        {1,9,0,0,0,4,5,0,0},
+        removeCells(board, clues);
 
-                        {8,2,0,1,0,0,0,4,0},
-                        {0,0,4,6,0,2,9,0,0},
-                        {0,5,0,0,0,3,0,2,8},
+        return board;
+    }
 
-                        {0,0,9,3,0,0,0,7,4},
-                        {0,4,0,0,5,0,0,3,6},
-                        {7,0,3,0,1,8,0,0,0}
-                },
+    // ===== STEP 1: FILL FULL BOARD =====
+    static boolean fillBoard(int[][] board){
 
-                {
-                        {0,2,0,6,0,8,0,0,0},
-                        {5,8,0,0,0,9,7,0,0},
-                        {0,0,0,0,4,0,0,0,0},
+        for(int row=0;row<9;row++){
+            for(int col=0;col<9;col++){
 
-                        {3,7,0,0,0,0,5,0,0},
-                        {6,0,0,0,0,0,0,0,4},
-                        {0,0,8,0,0,0,0,1,3},
+                if(board[row][col]==0){
 
-                        {0,0,0,0,2,0,0,0,0},
-                        {0,0,9,8,0,0,0,3,6},
-                        {0,0,0,3,0,6,0,9,0}
-                },
+                    List<Integer> nums = new ArrayList<>();
+                    for(int i=1;i<=9;i++) nums.add(i);
 
-                {
-                        {2,0,0,3,0,0,0,0,0},
-                        {8,0,4,0,6,2,0,0,3},
-                        {0,1,3,8,0,0,2,0,0},
+                    Collections.shuffle(nums);
 
-                        {0,0,0,0,2,0,3,9,0},
-                        {5,0,7,0,0,0,6,0,1},
-                        {0,3,2,0,4,0,0,0,0},
+                    for(int num: nums){
 
-                        {0,0,1,0,0,9,7,8,0},
-                        {4,0,0,2,5,0,1,0,6},
-                        {0,0,0,0,0,3,0,0,2}
-                },
+                        if(isSafe(board,row,col,num)){
 
-                {
-                        {0,0,0,0,0,0,2,0,0},
-                        {0,8,0,0,0,7,0,9,0},
-                        {6,0,2,0,0,0,5,0,0},
+                            board[row][col]=num;
 
-                        {0,7,0,0,6,0,0,0,0},
-                        {0,0,0,9,0,1,0,0,0},
-                        {0,0,0,0,2,0,0,4,0},
+                            if(fillBoard(board)) return true;
 
-                        {0,0,5,0,0,0,6,0,3},
-                        {0,9,0,4,0,0,0,7,0},
-                        {0,0,6,0,0,0,0,0,0}
+                            board[row][col]=0;
+                        }
+                    }
+
+                    return false;
                 }
+            }
+        }
 
-        };
+        return true;
+    }
 
+    // ===== STEP 2: REMOVE CELLS =====
+    static void removeCells(int[][] board, int clues){
 
-    public static int[][] easySolution = {
+        int remove = 81 - clues;
 
-            {5,3,4,6,7,8,9,1,2},
-            {6,7,2,1,9,5,3,4,8},
-            {1,9,8,3,4,2,5,6,7},
+        while(remove > 0){
 
-            {8,5,9,7,6,1,4,2,3},
-            {4,2,6,8,5,3,7,9,1},
-            {7,1,3,9,2,4,8,5,6},
+            int row = rand.nextInt(9);
+            int col = rand.nextInt(9);
 
-            {9,6,1,5,3,7,2,8,4},
-            {2,8,7,4,1,9,6,3,5},
-            {3,4,5,2,8,6,1,7,9}
+            if(board[row][col]==0) continue;
 
-    };
+            int backup = board[row][col];
+            board[row][col] = 0;
 
-    public static int[][][] medium = easy;
+            int[][] copy = copyBoard(board);
 
-    public static int[][][] hard = easy;
+            solutionCount = 0;
+            solve(copy);
+
+            if(solutionCount != 1){
+                board[row][col] = backup; // restore
+            } else {
+                remove--;
+            }
+        }
+    }
+
+    // ===== STEP 3: COUNT SOLUTIONS =====
+    static int solutionCount = 0;
+
+    static void solve(int[][] board){
+
+        if(solutionCount > 1) return;
+
+        for(int row=0;row<9;row++){
+            for(int col=0;col<9;col++){
+
+                if(board[row][col]==0){
+
+                    for(int num=1;num<=9;num++){
+
+                        if(isSafe(board,row,col,num)){
+
+                            board[row][col]=num;
+
+                            solve(board);
+
+                            board[row][col]=0;
+                        }
+                    }
+
+                    return;
+                }
+            }
+        }
+
+        solutionCount++;
+    }
+
+    // ===== CHECK VALID =====
+    static boolean isSafe(int[][] board,int row,int col,int num){
+
+        for(int i=0;i<9;i++){
+            if(board[row][i]==num || board[i][col]==num)
+                return false;
+        }
+
+        int sr = row - row%3;
+        int sc = col - col%3;
+
+        for(int i=sr;i<sr+3;i++){
+            for(int j=sc;j<sc+3;j++){
+                if(board[i][j]==num)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    // ===== COPY =====
+    static int[][] copyBoard(int[][] board){
+
+        int[][] copy = new int[9][9];
+
+        for(int i=0;i<9;i++){
+            System.arraycopy(board[i],0,copy[i],0,9);
+        }
+
+        return copy;
+    }
 }

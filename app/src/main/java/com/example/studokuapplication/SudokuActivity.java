@@ -50,17 +50,7 @@ public class SudokuActivity extends AppCompatActivity {
         Random random = new Random();
         int index = random.nextInt(5);
 
-        if(level.equals("dễ")){
-            puzzle = SudokuData.easy[index];
-        }
-
-        if(level.equals("trung bình")){
-            puzzle = SudokuData.medium[index];
-        }
-
-        if(level.equals("khó")){
-            puzzle = SudokuData.hard[index];
-        }
+        puzzle = SudokuData.generate(level);
 
         createBoard();
     }
