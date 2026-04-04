@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="@color/screen_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom Sudoku"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/sudoku_text"
+        android:layout_marginBottom="6dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nhập đề của bạn (để trống là ô 0)"
+        android:textColor="@color/sudoku_sub_text"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/txtCustomError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đề đang lỗi: trùng số hoặc giá trị không hợp lệ"
+        android:textColor="@color/mistake_text"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"/>
+
+    <GridLayout
+        android:id="@+id/gridCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rowCount="9"
+        android:columnCount="9"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnBackMainCustom"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="Trang chủ"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/button_secondary"/>
+
+        <Button
+            android:id="@+id/btnClearCustom"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="Clear"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/button_secondary"/>
+
+        <Button
+            android:id="@+id/btnPlayCustom"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="Play"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/button_hint"/>
+    </LinearLayout>
+
+</LinearLayout>
+

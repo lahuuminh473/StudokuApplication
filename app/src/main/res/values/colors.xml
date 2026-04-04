@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="screen_background">#F5F7FA</color>
+    <color name="card_background">#FFFFFFFF</color>
+    <color name="sudoku_text">#FF222222</color>
+    <color name="sudoku_sub_text">#FF4E5969</color>
+    <color name="mistake_text">#FFE53935</color>
+    <color name="button_secondary">#FF6B7280</color>
+    <color name="button_hint">#FF3B82F6</color>
+
+    <color name="cell_default">#FFFFFFFF</color>
+    <color name="cell_error">#FFEF5350</color>
+    <color name="cell_row_col">#FFE3F2FD</color>
+    <color name="cell_box">#FFBBDEFB</color>
+    <color name="cell_same_number">#FFFFF59D</color>
+    <color name="cell_border">#FF000000</color>
+</resources>

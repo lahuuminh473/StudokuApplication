@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="@color/screen_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Title -->
+    <TextView
+        android:text="Sudoku"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:textColor="@color/sudoku_text"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dark mode"
+        android:textColor="@color/sudoku_text"
+        android:layout_marginBottom="18dp"/>
+
+    <!-- Easy -->
+    <Button
+        android:id="@+id/btnEasy"
+        android:text="Dễ"
+        android:textSize="18sp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#4CAF50"/>
+
+    <!-- Medium -->
+    <Button
+        android:id="@+id/btnMedium"
+        android:text="Trung bình"
+        android:textSize="18sp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#FFC107"/>
+
+    <!-- Hard -->
+    <Button
+        android:id="@+id/btnHard"
+        android:text="Khó"
+        android:textSize="18sp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#F44336"/>
+
+    <Button
+        android:id="@+id/btnDaily"
+        android:text="Daily Challenge"
+        android:textSize="18sp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#3F51B5"/>
+
+    <Button
+        android:id="@+id/btnLeaderboard"
+        android:text="Leaderboard"
+        android:textSize="18sp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/button_secondary"/>
+
+    <Button
+        android:id="@+id/btnAchievements"
+        android:text="Achievements"
+        android:textSize="18sp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#8E24AA"/>
+
+    <Button
+        android:id="@+id/btnCustom"
+        android:text="Custom Sudoku"
+        android:textSize="18sp"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/button_hint"/>
+
+    <!-- History title -->
+    <TextView
+        android:text="Lịch sử chơi"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/sudoku_text"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- History content -->
+    <TextView
+        android:id="@+id/history"
+        android:text="Chưa có lịch sử"
+        android:textSize="16sp"
+        android:textColor="@color/sudoku_text"
+        android:background="@color/card_background"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

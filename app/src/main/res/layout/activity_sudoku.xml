@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/screen_background"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/txtLevel"
+        android:text="Sudoku - Easy"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/sudoku_text"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txtTimer"
+        android:text="Timer: 00:00"
+        android:textSize="18sp"
+        android:textColor="@color/sudoku_text"
+        android:layout_marginBottom="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txtBestTime"
+        android:text="Best: --:--"
+        android:textSize="16sp"
+        android:textColor="@color/sudoku_sub_text"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Mistakes -->
+    <TextView
+        android:id="@+id/txtMistake"
+        android:text="Mistakes: 0/10"
+        android:textSize="18sp"
+        android:textColor="@color/mistake_text"
+        android:layout_marginBottom="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnHint"
+        android:text="Hint"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/button_hint"
+        android:layout_width="140dp"
+        android:layout_height="48dp"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <GridLayout
+            android:id="@+id/gridSudoku"
+            android:columnCount="9"
+            android:rowCount="9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/boxCelebrateAnimation"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false" />
+
+    </FrameLayout>
+
+
+</LinearLayout>
