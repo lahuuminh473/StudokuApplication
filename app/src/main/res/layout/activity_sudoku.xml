@@ -57,6 +57,13 @@
         android:backgroundTint="@color/button_hint"
         android:layout_width="140dp"
         android:layout_height="48dp"/>
+    <Button
+        android:id="@+id/btnAutoCandidate"
+        android:text="Auto-Candidate: OFF"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/button_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

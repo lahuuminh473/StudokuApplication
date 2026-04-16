@@ -42,7 +42,7 @@ public class SudokuActivity extends AppCompatActivity {
     EditText[][] cells = new EditText[9][9];
     boolean[][] fixedCells = new boolean[9][9];
     boolean[][] celebratedBoxes = new boolean[3][3];
-
+    boolean isAutoCandidateEnabled = false;
     int[][] puzzle;
     int[][] solution;
 
@@ -146,7 +146,15 @@ public class SudokuActivity extends AppCompatActivity {
         updateBestTime();
 
         btnHint.setOnClickListener(v -> useHint());
+        Button btnAutoCandidate = findViewById(R.id.btnAutoCandidate);
 
+        btnAutoCandidate.setOnClickListener(v -> {
+            isAutoCandidateEnabled = !isAutoCandidateEnabled;
+
+            btnAutoCandidate.setText(isAutoCandidateEnabled ? "Auto-Candidate: ON" : "Auto-Candidate: OFF");
+
+            updateAutoCandidates();
+        });
         createBoard();
     }
 
@@ -189,6 +197,7 @@ public class SudokuActivity extends AppCompatActivity {
                         selectedRow = row;
                         selectedCol = col;
                         refreshBoard();
+                        updateAutoCandidates();
                     }
 
                 });
@@ -302,18 +311,32 @@ public class SudokuActivity extends AppCompatActivity {
     }
 
     void updateAutoCandidates() {
+
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
+
                 EditText cell = cells[row][col];
-                if (cell == null) {
+                if (cell == null) continue;
+
+                //  Nếu tắt → xóa hết hint
+                if (!isAutoCandidateEnabled) {
+                    cell.setHint("");
                     continue;
                 }
 
+                //  Nếu không phải ô đang chọn → không hiện
+                if (row != selectedRow || col != selectedCol) {
+                    cell.setHint("");
+                    continue;
+                }
+
+                // Nếu ô đã có số → không hiện
                 if (!cell.getText().toString().isEmpty()) {
                     cell.setHint("");
                     continue;
                 }
 
+                //  Chỉ còn đúng ô đang focus và trống
                 String candidates = buildCandidates(row, col);
                 cell.setHint(candidates);
             }
@@ -488,7 +511,10 @@ public class SudokuActivity extends AppCompatActivity {
     void showWinGame(){
         new AlertDialog.Builder(this)
                 .setTitle("Win")
-                .setMessage("🎉 Bạn đã thắng\nThời gian: " + formatDuration(getCurrentDuration()) + "\nHint đã dùng: " + hintsUsed)
+                .setMessage("🎉 Bạn đã thắng\nThời gian: "
+                        + formatDuration(getCurrentDuration())
+                        + "\nHint đã dùng: " + hintsUsed)
+                .setCancelable(false) // 👈 QUAN TRỌNG
                 .setPositiveButton("OK", (d,w)->{
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
